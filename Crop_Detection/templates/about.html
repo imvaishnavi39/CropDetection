@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - CropCare AI{% endblock %}
+
+{% block content %}
+<section class="relative">
+    <div class="absolute inset-0 -z-10">
+        <div class="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-brand-600/15 blur-3xl"></div>
+        <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-leaf-600/15 blur-3xl"></div>
+    </div>
+
+    <div class="rounded-3xl bg-white shadow-lift border border-slate-200/70 overflow-hidden">
+        <div class="p-8 md:p-10 bg-gradient-to-r from-ink-900 to-ink-700 text-white">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-sm font-semibold">
+                <i class="fas fa-circle-info"></i>
+                About this project
+            </div>
+            <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">CropCare AI</h1>
+            <p class="mt-3 text-white/70 max-w-3xl">
+                A clean, college-ready web application that detects common leaf diseases from an uploaded image and returns
+                a label with confidence and recommendations.
+            </p>
+        </div>
+
+        <div class="p-8 md:p-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 rounded-3xl border border-slate-200/70 bg-slate-50 p-6">
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-soft text-leaf-700">
+                            <i class="fas fa-bullseye"></i>
+                        </span>
+                        <div class="font-extrabold text-ink-900">What is it?</div>
+                    </div>
+                    <p class="mt-4 text-slate-600 leading-relaxed text-sm">
+                        CropCare AI helps users upload a plant leaf image and instantly see a prediction like Healthy, Powdery Mildew,
+                        Rust, or Leaf Spot — along with confidence and class-wise probabilities.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 rounded-3xl border border-slate-200/70 bg-white p-6 shadow-soft">
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
+                            <i class="fas fa-gears"></i>
+                        </span>
+                        <div class="font-extrabold text-ink-900">How it works</div>
+                    </div>
+
+                    <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="rounded-2xl border border-slate-200/70 p-4">
+                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 1</div>
+                            <div class="mt-1 font-bold text-ink-900">Upload an image</div>
+                            <div class="mt-1 text-sm text-slate-600">Choose a JPG/PNG/GIF under 5MB.</div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200/70 p-4">
+                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 2</div>
+                            <div class="mt-1 font-bold text-ink-900">Preprocess</div>
+                            <div class="mt-1 text-sm text-slate-600">Resize to 224×224 and normalize RGB.</div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200/70 p-4">
+                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 3</div>
+                            <div class="mt-1 font-bold text-ink-900">Predict</div>
+                            <div class="mt-1 text-sm text-slate-600">Model returns probabilities for each class.</div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200/70 p-4">
+                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 4</div>
+                            <div class="mt-1 font-bold text-ink-900">Show results</div>
+                            <div class="mt-1 text-sm text-slate-600">Confidence, scores, and recommendations.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <div class="flex items-center justify-between gap-4 flex-wrap">
+                    <h2 class="text-2xl font-extrabold tracking-tight text-ink-900">Technologies used</h2>
+                    <div class="text-sm text-slate-600">Simple stack, easy to explain in viva.</div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
+                                <i class="fas fa-code"></i>
+                            </span>
+                            <div class="font-extrabold text-ink-900">Django</div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">Routing, templates, form validation, sessions.</p>
+                    </div>
+                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                            </span>
+                            <div class="font-extrabold text-ink-900">Model loader</div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">Loads a placeholder `.pkl` model (optional `.h5`).</p>
+                    </div>
+                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-leaf-600/10 text-leaf-700">
+                                <i class="fas fa-image"></i>
+                            </span>
+                            <div class="font-extrabold text-ink-900">Pillow + NumPy</div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">Image resize/normalize and prediction formatting.</p>
+                    </div>
+                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
+                                <i class="fas fa-palette"></i>
+                            </span>
+                            <div class="font-extrabold text-ink-900">Tailwind (CDN)</div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">Modern UI components without build tooling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 rounded-3xl border border-slate-200/70 bg-slate-50 p-6">
+                <div class="flex items-start gap-3">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-soft text-amber-600">
+                        <i class="fas fa-lightbulb"></i>
+                    </span>
+                    <div>
+                        <div class="font-extrabold text-ink-900">Presentation tip</div>
+                        <p class="mt-1 text-sm text-slate-600">
+                            Focus your explanation on the pipeline: upload → preprocess → predict → show confidence + recommendations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

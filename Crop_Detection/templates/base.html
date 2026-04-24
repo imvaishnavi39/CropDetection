@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crop Disease Detection AI{% endblock %}</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons (Heroicons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: { 900: "#0B1220", 700: "#1B2640" },
+              mist: { 50: "#F7FAFF", 100: "#EEF4FF" },
+              brand: { 600: "#2F6BFF", 700: "#1F57F0" },
+              leaf: { 600: "#16A34A", 700: "#15803D" },
+            },
+            boxShadow: {
+              soft: "0 12px 40px rgba(11, 18, 32, 0.10)",
+              lift: "0 18px 60px rgba(11, 18, 32, 0.14)",
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      .glass { background: rgba(255,255,255,.72); backdrop-filter: blur(10px); }
+      .nav-pill { transition: transform .15s ease, background-color .2s ease, color .2s ease; }
+      .nav-pill:hover { transform: translateY(-1px); }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-mist-50 via-white to-mist-100 min-h-screen flex flex-col text-ink-900">
+    <!-- Top Bar -->
+    <nav class="sticky top-0 z-50 border-b border-slate-200/70 glass">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between py-3">
+                <a href="{% url 'detection:index' %}" class="group flex items-center gap-3">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-leaf-600 to-brand-600 text-white shadow-soft">
+                        <i class="fas fa-leaf"></i>
+                    </span>
+                    <div class="leading-tight">
+                        <div class="font-extrabold tracking-tight text-ink-900">CropCare AI</div>
+                        <div class="text-xs text-slate-600">Leaf scan • disease insights</div>
+                    </div>
+                </a>
+
+                <div class="hidden sm:flex items-center gap-2">
+                    <a href="{% url 'detection:index' %}"
+                       class="nav-pill px-3 py-2 rounded-xl text-sm font-semibold {% if request.resolver_match.url_name == 'index' %}bg-ink-900 text-white{% else %}text-slate-700 hover:bg-slate-100{% endif %}">
+                        Home
+                    </a>
+                    <a href="{% url 'detection:about' %}"
+                       class="nav-pill px-3 py-2 rounded-xl text-sm font-semibold {% if request.resolver_match.url_name == 'about' %}bg-ink-900 text-white{% else %}text-slate-700 hover:bg-slate-100{% endif %}">
+                        About
+                    </a>
+                    <a href="{% url 'detection:contact' %}"
+                       class="nav-pill px-3 py-2 rounded-xl text-sm font-semibold {% if request.resolver_match.url_name == 'contact' %}bg-ink-900 text-white{% else %}text-slate-700 hover:bg-slate-100{% endif %}">
+                        Contact
+                    </a>
+                </div>
+
+                <a href="{% url 'detection:index' %}" class="sm:hidden inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-ink-900 text-white text-sm font-semibold">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    Detect
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                alert("{{ message|escapejs }}");
+            {% endif %}
+        {% endfor %}
+    </script>
+    <div class="max-w-6xl mx-auto px-4 mt-4 w-full">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} p-4 mb-4 rounded-lg {% if message.tags == 'error' %}bg-red-100 text-red-700 border border-red-400{% elif message.tags == 'success' %}bg-green-100 text-green-700 border border-green-400{% elif message.tags == 'warning' %}bg-yellow-100 text-yellow-700 border border-yellow-400{% else %}bg-blue-100 text-blue-700 border border-blue-400{% endif %}" role="alert">
+            <button type="button" class="float-right" onclick="this.parentElement.style.display='none';">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <i class="fas fa-info-circle mr-2"></i>{{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-10 w-full">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="rounded-3xl bg-ink-900 text-white shadow-lift overflow-hidden">
+                <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10">
+                                <i class="fas fa-leaf text-leaf-600"></i>
+                            </span>
+                            <div class="font-extrabold text-lg tracking-tight">CropCare AI</div>
+                        </div>
+                        <p class="text-white/70 text-sm leading-relaxed">
+                            A simple college-ready web app that scans a leaf photo and returns a disease label with confidence.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="text-sm font-bold text-white mb-3">Pages</div>
+                        <ul class="text-sm text-white/70 space-y-2">
+                            <li><a class="hover:text-white" href="{% url 'detection:index' %}">Home</a></li>
+                            <li><a class="hover:text-white" href="{% url 'detection:about' %}">About</a></li>
+                            <li><a class="hover:text-white" href="{% url 'detection:contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="text-sm font-bold text-white mb-3">Built with</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Django</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Tailwind (CDN)</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">Pillow</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-xs">NumPy</span>
+                        </div>
+                        <p class="mt-4 text-xs text-white/55">© 2026 CropCare AI • Demo project</p>
+                    </div>
+                </div>
+                <div class="px-8 pb-8 md:px-10 md:pb-10">
+                    <div class="h-px bg-white/10"></div>
+                    <div class="pt-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-xs text-white/55">
+                        <span>AI output is a prediction — verify with an expert for real decisions.</span>
+                        <span class="text-white/60">Healthy • Powdery Mildew • Rust • Leaf Spot</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
