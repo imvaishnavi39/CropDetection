@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.files.storage import default_storage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .forms import ImageUploadForm, FeedbackForm, SignUpForm
 from .model_loader import predict_disease
 from .models import ScanHistory, ContactMessage
@@ -14,9 +15,10 @@ from django.views.decorators.http import require_POST
 from .chatbot import answer_message
 
 
+@login_required(login_url='detection:login')
 def index(request):
     """
-    Home page view - handles image upload.
+    Home page view - handles image upload. Requires user to be logged in.
     """
     form = ImageUploadForm()
     
@@ -69,9 +71,10 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required(login_url='detection:login')
 def result(request, image_id):
     """
-    Result page view - displays disease prediction.
+    Result page view - displays disease prediction. Requires user to be logged in.
     """
     # Get upload info from session
     uploads = request.session.get('uploads', [])
@@ -265,10 +268,11 @@ def chatbot_message(request):
     return JsonResponse({"reply": result.get("reply", "")})
 
 
+@login_required(login_url='detection:login')
 def history(request):
     """
     History page – lists all past scans stored in the database.
-    Supports clearing all history via a POST request.
+    Supports clearing all history via a POST request. Requires user to be logged in.
     """
     if request.method == 'POST' and request.POST.get('action') == 'clear':
         ScanHistory.objects.all().delete()
