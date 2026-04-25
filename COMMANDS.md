@@ -263,6 +263,9 @@ Create a `.env` file for sensitive settings:
 DEBUG=True
 SECRET_KEY=your-secret-key-here
 ALLOWED_HOSTS=localhost,127.0.0.1
+GEMINI_API_KEY=your-gemini-api-key-here
+# or if your deploy platform uses GOOGLE_API_KEY:
+# GOOGLE_API_KEY=your-gemini-api-key-here
 ```
 
 Load in settings.py:

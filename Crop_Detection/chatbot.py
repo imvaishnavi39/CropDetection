@@ -56,25 +56,36 @@ def answer_local(message: str) -> Dict[str, str]:
 
 def answer_message(message: str) -> Dict[str, str]:
     """
-    Uses Gemini if GEMINI_API_KEY is set, otherwise falls back to a local FAQ.
+    Uses Gemini if a supported API key is set, otherwise falls back to a local FAQ.
     """
-    gemini_key = os.getenv("GEMINI_API_KEY")
+    gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if gemini_key:
         try:
             import google.generativeai as genai
 
             genai.configure(api_key=gemini_key)
-            model = genai.GenerativeModel(
-                "gemini-1.5-flash",
-                system_instruction=(
-                    "You are CropCare AI assistant for a crop disease detection demo website. "
-                    "Be concise, helpful, and practical. "
-                    "Do not claim medical certainty. "
-                    "If asked for treatment, provide general best-practice guidance and advise consulting local agronomy experts."
-                ),
+            system_instruction = (
+                "You are CropCare AI assistant for a crop disease detection demo website. "
+                "Be concise, helpful, and practical. "
+                "Do not claim medical certainty. "
+                "If asked for treatment, provide general best-practice guidance and advise consulting local agronomy experts."
             )
-            resp = model.generate_content(message)
-            text = getattr(resp, "text", "") or ""
+
+            try:
+                model = genai.GenerativeModel(
+                    "gemini-1.5-flash",
+                    system_instruction=system_instruction,
+                )
+                resp = model.generate_content(message)
+                text = getattr(resp, "text", "") or ""
+            except Exception:
+                resp = genai.generate_text(
+                    model="gemini-1.5-flash",
+                    prompt=message,
+                    system_instruction=system_instruction,
+                )
+                text = getattr(resp, "text", "") or ""
+
             text = text.strip()
             if text:
                 return {"reply": text}
