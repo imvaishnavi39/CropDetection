@@ -7,12 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .forms import ImageUploadForm, FeedbackForm, SignUpForm
 from .model_loader import predict_disease
 from .models import ScanHistory, ContactMessage
+from .service import get_chat_response_view, initialize_chat_view, clear_chat_memory_view
 import os
 import json
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .chatbot import answer_message
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required(login_url='detection:login')
@@ -254,18 +255,26 @@ def logout_view(request):
 
 
 @require_POST
+@csrf_exempt  # For AJAX requests, but keep CSRF protection in frontend
 def chatbot_message(request):
     """
-    JSON endpoint for the on-site chatbot widget.
+    Advanced chatbot endpoint using Gemini API with memory.
     """
-    try:
-        payload = json.loads(request.body.decode("utf-8") or "{}")
-    except Exception:
-        payload = {}
+    return get_chat_response_view(request)
 
-    message = (payload.get("message") or "").strip()
-    result = answer_message(message)
-    return JsonResponse({"reply": result.get("reply", "")})
+
+def chatbot_initialize(request):
+    """
+    Initialize chatbot session.
+    """
+    return initialize_chat_view(request)
+
+
+def chatbot_clear_memory(request):
+    """
+    Clear chatbot memory.
+    """
+    return clear_chat_memory_view(request)
 
 
 @login_required(login_url='detection:login')

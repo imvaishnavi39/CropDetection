@@ -297,7 +297,7 @@
           }
         }
 
-        function addMessage(text, who) {
+        function typeWriter(text, who, speed = 30) {
           const row = document.createElement('div');
           row.className = 'flex items-start gap-2 ' + (who === 'user' ? 'justify-end' : '');
 
@@ -314,7 +314,6 @@
             (who === 'user'
               ? 'bg-emerald-600 text-white'
               : 'bg-white/5 border border-white/10 text-slate-300');
-          bubble.textContent = text;
           row.appendChild(bubble);
 
           if (who === 'user') {
@@ -325,6 +324,17 @@
 
           messages.appendChild(row);
           messages.scrollTop = messages.scrollHeight;
+
+          // Typing effect
+          let i = 0;
+          function type() {
+            if (i < text.length) {
+              bubble.textContent += text.charAt(i);
+              i++;
+              setTimeout(type, speed);
+            }
+          }
+          type();
         }
 
         toggleBtn.addEventListener('click', () => setOpen(panel.classList.contains('hidden')));
@@ -349,9 +359,17 @@
               body: JSON.stringify({ message: text })
             });
             const data = await res.json();
-            addMessage((data && data.reply) ? data.reply : 'Sorry, I could not respond.', 'bot');
+
+            if (data.error) {
+              typeWriter('Sorry, I encountered an error. Please try again.', 'bot');
+              console.error('Chat error:', data.error);
+            } else {
+              // Add typing effect for bot response
+              typeWriter(data.reply, 'bot');
+            }
           } catch (err) {
             addMessage('Network error. Please try again.', 'bot');
+            console.error('Network error:', err);
           } finally {
             hint.textContent = '';
           }
