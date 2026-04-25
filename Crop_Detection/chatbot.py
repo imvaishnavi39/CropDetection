@@ -34,6 +34,10 @@ FAQ: List[Tuple[List[str], str]] = [
         ["contact", "support", "help"],
         "You can reach us via the Contact page. If you found an issue or have an improvement idea, the Feedback page is perfect too.",
     ),
+    (
+        ["what is this", "what is this platform", "platform", "about this", "about the platform", "what is cropcare", "what is cropcare ai"],
+        "CropCare AI is a crop disease detection demo app. Upload a leaf image and it predicts if the plant is Healthy, Powdery Mildew, Rust, or Leaf Spot.",
+    ),
 ]
 
 
