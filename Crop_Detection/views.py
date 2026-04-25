@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.files.storage import default_storage
-from .forms import ImageUploadForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import ImageUploadForm, FeedbackForm, SignUpForm
 from .model_loader import predict_disease
+from .models import ScanHistory, ContactMessage
 import os
 import json
 from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .chatbot import answer_message
 
 
 def index(request):
@@ -91,6 +97,17 @@ def result(request, image_id):
         
         # Make prediction
         prediction = predict_disease(media_path)
+
+        # --- Persist to DB (upsert by image_path so re-scans don't duplicate) ---
+        ScanHistory.objects.update_or_create(
+            image_path=upload_info['image_path'],
+            defaults={
+                'original_name': upload_info['original_name'],
+                'disease': prediction['disease'],
+                'confidence': prediction['confidence'],
+                'all_predictions': prediction['all_predictions'],
+            }
+        )
         
         context = {
             'image_url': f"/media/{upload_info['image_path']}",
@@ -144,26 +161,14 @@ def contact(request):
             return render(request, 'contact.html')
         
         try:
-            # In a real application, you would:
-            # 1. Send an email to your support team
-            # 2. Save the message to database
-            # For now, we just show a success message
-            
-            # Log the message (in production, save to database or send email)
-            print(f"\n=== New Contact Message ===")
-            print(f"Name: {name}")
-            print(f"Email: {email}")
-            print(f"Subject: {subject}")
-            if message:
-                print(f"Message: {message}")
-            else:
-                print("Message: (empty)")
-            print(f"===========================\n")
-            
-            # Show success message
+            # Save message to the database
+            ContactMessage.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message,
+            )
             messages.success(request, f'Thank you {name}! Your message has been sent successfully. We will get back to you soon.')
-            
-            # Redirect to avoid form resubmission
             return redirect('detection:contact')
         
         except Exception as e:
@@ -175,3 +180,105 @@ def contact(request):
     }
     
     return render(request, 'contact.html', context)
+
+
+def feedback(request):
+    """
+    Feedback page view - stores user feedback in the database.
+    """
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback_obj = form.save()
+            messages.success(
+                request,
+                f"Thanks {feedback_obj.name}! Your feedback has been submitted.",
+            )
+            return redirect("detection:feedback")
+        messages.error(request, "Please correct the errors below and resubmit.")
+    else:
+        form = FeedbackForm()
+
+    return render(
+        request,
+        "feedback.html",
+        {
+            "form": form,
+            "page_title": "Feedback",
+            "page_description": "Help us improve CropCare AI.",
+        },
+    )
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('detection:index')
+
+    form = AuthenticationForm(request=request, data=request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f"Welcome back, {user.username}!")
+            return redirect('detection:index')
+        messages.error(request, 'Login failed. Check your username and password.')
+
+    return render(request, 'login.html', {'form': form})
+
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('detection:index')
+
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Your account has been created successfully.')
+            return redirect('detection:index')
+        messages.error(request, 'Please fix the errors below.')
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signup.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been logged out.')
+    return redirect('detection:index')
+
+
+@require_POST
+def chatbot_message(request):
+    """
+    JSON endpoint for the on-site chatbot widget.
+    """
+    try:
+        payload = json.loads(request.body.decode("utf-8") or "{}")
+    except Exception:
+        payload = {}
+
+    message = (payload.get("message") or "").strip()
+    result = answer_message(message)
+    return JsonResponse({"reply": result.get("reply", "")})
+
+
+def history(request):
+    """
+    History page – lists all past scans stored in the database.
+    Supports clearing all history via a POST request.
+    """
+    if request.method == 'POST' and request.POST.get('action') == 'clear':
+        ScanHistory.objects.all().delete()
+        messages.success(request, 'Scan history cleared successfully.')
+        return redirect('detection:history')
+
+    scans = ScanHistory.objects.all()   # already ordered by -scanned_at via Meta
+    return render(request, 'history.html', {
+        'scans': scans,
+        'page_title': 'Scan History',
+        'page_description': 'All past plant disease scan results.',
+    })
+

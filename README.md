@@ -60,6 +60,13 @@ CropCare AI/
 └── venv/                               # Virtual environment (created later)
 ```
 
+### Note on naming (`models.py` vs ML model files)
+
+- **`Crop_Detection/models.py`**: Django **database** models (tables).
+- **`model/plant_model.pkl` / `model/plant_model.h5`**: ML model **files** used for predictions.
+- **`create_model.py`**: utility script to generate the placeholder `plant_model.pkl`.
+- **`Crop_Detection/model_loader.py`**: loads the ML model file and runs inference.
+
 ## 🚀 Installation & Setup
 
 ### Prerequisites

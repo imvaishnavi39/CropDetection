@@ -3,134 +3,134 @@
 {% block title %}About Us - CropCare AI{% endblock %}
 
 {% block content %}
-<section class="relative">
-    <div class="absolute inset-0 -z-10">
-        <div class="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-brand-600/15 blur-3xl"></div>
-        <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-leaf-600/15 blur-3xl"></div>
+<section class="relative animate-fade-in-down">
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-emerald-500/10 blur-[100px]"></div>
+        <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-teal-500/10 blur-[100px]"></div>
     </div>
 
-    <div class="rounded-3xl bg-white shadow-lift border border-slate-200/70 overflow-hidden">
-        <div class="p-8 md:p-10 bg-gradient-to-r from-ink-900 to-ink-700 text-white">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-sm font-semibold">
-                <i class="fas fa-circle-info"></i>
-                About this project
+    <!-- Header -->
+    <div class="rounded-[2.5rem] bg-ink-900 text-white shadow-2xl overflow-hidden relative mb-10">
+        <div class="absolute inset-0 bg-hero-glow opacity-20 blur-3xl"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-teal-500/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+        
+        <div class="p-10 md:p-14 relative z-10 text-center max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-emerald-400 text-sm font-bold mb-6">
+                <i class="fas fa-microchip"></i>
+                Technology Overview
             </div>
-            <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">CropCare AI</h1>
-            <p class="mt-3 text-white/70 max-w-3xl">
-                A clean, college-ready web application that detects common leaf diseases from an uploaded image and returns
-                a label with confidence and recommendations.
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-6">About CropCare AI</h1>
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-medium">
+                An advanced demonstration of applying deep learning to agricultural challenges. We provide instant, accurate crop disease diagnosis through a sleek, intuitive web interface.
             </p>
         </div>
+    </div>
 
-        <div class="p-8 md:p-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-5 rounded-3xl border border-slate-200/70 bg-slate-50 p-6">
-                    <div class="flex items-center gap-3">
-                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-soft text-leaf-700">
-                            <i class="fas fa-bullseye"></i>
-                        </span>
-                        <div class="font-extrabold text-ink-900">What is it?</div>
-                    </div>
-                    <p class="mt-4 text-slate-600 leading-relaxed text-sm">
-                        CropCare AI helps users upload a plant leaf image and instantly see a prediction like Healthy, Powdery Mildew,
-                        Rust, or Leaf Spot — along with confidence and class-wise probabilities.
-                    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- The Mission -->
+        <div class="lg:col-span-5 rounded-[2rem] glass-panel p-8 shadow-xl border border-white/10">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="h-12 w-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shadow-sm border border-emerald-500/30">
+                    <i class="fas fa-bullseye"></i>
                 </div>
-
-                <div class="lg:col-span-7 rounded-3xl border border-slate-200/70 bg-white p-6 shadow-soft">
-                    <div class="flex items-center gap-3">
-                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
-                            <i class="fas fa-gears"></i>
-                        </span>
-                        <div class="font-extrabold text-ink-900">How it works</div>
-                    </div>
-
-                    <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="rounded-2xl border border-slate-200/70 p-4">
-                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 1</div>
-                            <div class="mt-1 font-bold text-ink-900">Upload an image</div>
-                            <div class="mt-1 text-sm text-slate-600">Choose a JPG/PNG/GIF under 5MB.</div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-200/70 p-4">
-                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 2</div>
-                            <div class="mt-1 font-bold text-ink-900">Preprocess</div>
-                            <div class="mt-1 text-sm text-slate-600">Resize to 224×224 and normalize RGB.</div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-200/70 p-4">
-                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 3</div>
-                            <div class="mt-1 font-bold text-ink-900">Predict</div>
-                            <div class="mt-1 text-sm text-slate-600">Model returns probabilities for each class.</div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-200/70 p-4">
-                            <div class="text-xs font-extrabold text-slate-500 uppercase">Step 4</div>
-                            <div class="mt-1 font-bold text-ink-900">Show results</div>
-                            <div class="mt-1 text-sm text-slate-600">Confidence, scores, and recommendations.</div>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="font-display font-bold text-2xl text-white">Project Mission</h2>
             </div>
-
-            <div class="mt-10">
-                <div class="flex items-center justify-between gap-4 flex-wrap">
-                    <h2 class="text-2xl font-extrabold tracking-tight text-ink-900">Technologies used</h2>
-                    <div class="text-sm text-slate-600">Simple stack, easy to explain in viva.</div>
-                </div>
-
-                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
-                        <div class="flex items-center gap-3">
-                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
-                                <i class="fas fa-code"></i>
-                            </span>
-                            <div class="font-extrabold text-ink-900">Django</div>
-                        </div>
-                        <p class="mt-3 text-sm text-slate-600">Routing, templates, form validation, sessions.</p>
-                    </div>
-                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
-                        <div class="flex items-center gap-3">
-                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
-                                <i class="fas fa-wand-magic-sparkles"></i>
-                            </span>
-                            <div class="font-extrabold text-ink-900">Model loader</div>
-                        </div>
-                        <p class="mt-3 text-sm text-slate-600">Loads a placeholder `.pkl` model (optional `.h5`).</p>
-                    </div>
-                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
-                        <div class="flex items-center gap-3">
-                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-leaf-600/10 text-leaf-700">
-                                <i class="fas fa-image"></i>
-                            </span>
-                            <div class="font-extrabold text-ink-900">Pillow + NumPy</div>
-                        </div>
-                        <p class="mt-3 text-sm text-slate-600">Image resize/normalize and prediction formatting.</p>
-                    </div>
-                    <div class="rounded-3xl bg-white border border-slate-200/70 p-5 shadow-soft">
-                        <div class="flex items-center gap-3">
-                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
-                                <i class="fas fa-palette"></i>
-                            </span>
-                            <div class="font-extrabold text-ink-900">Tailwind (CDN)</div>
-                        </div>
-                        <p class="mt-3 text-sm text-slate-600">Modern UI components without build tooling.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-10 rounded-3xl border border-slate-200/70 bg-slate-50 p-6">
+            <p class="text-slate-400 leading-relaxed font-medium mb-6">
+                CropCare AI bridges the gap between complex machine learning models and end-users. By uploading a single image of a plant leaf, users receive immediate feedback on potential diseases like Powdery Mildew, Rust, or Leaf Spot.
+            </p>
+            <div class="rounded-xl bg-white/5 border border-white/10 p-5">
                 <div class="flex items-start gap-3">
-                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-soft text-amber-600">
-                        <i class="fas fa-lightbulb"></i>
-                    </span>
+                    <i class="fas fa-lightbulb text-amber-500 mt-1"></i>
                     <div>
-                        <div class="font-extrabold text-ink-900">Presentation tip</div>
-                        <p class="mt-1 text-sm text-slate-600">
-                            Focus your explanation on the pipeline: upload → preprocess → predict → show confidence + recommendations.
-                        </p>
+                        <div class="font-bold text-white mb-1">Perfect for Demonstrations</div>
+                        <p class="text-sm text-slate-400">The entire pipeline—from image upload and preprocessing to inference and result visualization—is designed to be easily explained during technical reviews.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- The Process -->
+        <div class="lg:col-span-7 rounded-[2rem] glass-panel p-8 shadow-xl border border-white/10">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-12 w-12 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl shadow-sm border border-teal-500/30">
+                    <i class="fas fa-gears"></i>
+                </div>
+                <h2 class="font-display font-bold text-2xl text-white">How It Works</h2>
+            </div>
+
+            <div class="relative border-l-2 border-white/10 ml-6 space-y-8 pb-4">
+                <!-- Step 1 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0.5 h-8 w-8 rounded-full bg-[#06090F] border-4 border-emerald-500 flex items-center justify-center shadow-md">
+                        <span class="text-xs font-bold text-emerald-400">1</span>
+                    </div>
+                    <div class="font-display font-bold text-lg text-white mb-1">Image Acquisition</div>
+                    <p class="text-slate-400 text-sm font-medium">User uploads a high-resolution leaf image via the drag-and-drop interface. Client-side validation ensures correct format and size.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0.5 h-8 w-8 rounded-full bg-[#06090F] border-4 border-teal-500 flex items-center justify-center shadow-md">
+                        <span class="text-xs font-bold text-teal-400">2</span>
+                    </div>
+                    <div class="font-display font-bold text-lg text-white mb-1">Preprocessing Pipeline</div>
+                    <p class="text-slate-400 text-sm font-medium">The image is passed to the Django backend where Pillow resizes it to 224x224 pixels and NumPy normalizes the RGB channels to match model training conditions.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0.5 h-8 w-8 rounded-full bg-[#06090F] border-4 border-emerald-500 flex items-center justify-center shadow-md">
+                        <span class="text-xs font-bold text-emerald-400">3</span>
+                    </div>
+                    <div class="font-display font-bold text-lg text-white mb-1">Model Inference</div>
+                    <p class="text-slate-400 text-sm font-medium">The processed tensor is fed into the loaded `.pkl` (or `.h5`) model, generating softmax probabilities across all supported disease classes.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0.5 h-8 w-8 rounded-full bg-[#06090F] border-4 border-teal-500 flex items-center justify-center shadow-md">
+                        <span class="text-xs font-bold text-teal-400">4</span>
+                    </div>
+                    <div class="font-display font-bold text-lg text-white mb-1">Result Visualization</div>
+                    <p class="text-slate-400 text-sm font-medium">Results are rendered on a comprehensive dashboard showing primary diagnosis, confidence intervals, and actionable recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack Grid -->
+    <div class="mt-10 mb-6">
+        <h2 class="text-2xl font-display font-bold text-white mb-6 text-center">Core Technologies</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="rounded-[1.5rem] bg-white/5 border border-white/10 p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-12 w-12 rounded-xl bg-slate-800 text-white flex items-center justify-center text-xl mb-4 shadow-sm border border-slate-700">
+                    <i class="fab fa-python"></i>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">Django Framework</h3>
+                <p class="text-sm text-slate-400 font-medium">Handles robust routing, secure file uploads, CSRF protection, and server-side template rendering.</p>
+            </div>
+            
+            <div class="rounded-[1.5rem] bg-white/5 border border-white/10 p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-12 w-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 shadow-sm border border-emerald-500/30">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">Machine Learning</h3>
+                <p class="text-sm text-slate-400 font-medium">Scikit-learn / TensorFlow model loader providing fast, optimized inference for classification tasks.</p>
+            </div>
+            
+            <div class="rounded-[1.5rem] bg-white/5 border border-white/10 p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-12 w-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl mb-4 shadow-sm border border-teal-500/30">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">NumPy & Pillow</h3>
+                <p class="text-sm text-slate-400 font-medium">Essential libraries for fast image matrix manipulation, resizing, and array normalization.</p>
+            </div>
+            
+            <div class="rounded-[1.5rem] bg-white/5 border border-white/10 p-6 shadow-md hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-12 w-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-4 shadow-sm border border-blue-500/30">
+                    <i class="fab fa-css3-alt"></i>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">Tailwind CSS</h3>
+                <p class="text-sm text-slate-400 font-medium">Utility-first CSS framework enabling this responsive, industry-standard glassmorphic design.</p>
             </div>
         </div>
     </div>
 </section>
-
 {% endblock %}

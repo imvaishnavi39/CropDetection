@@ -3,137 +3,136 @@
 {% block title %}Upload Plant Image - Crop Disease Detection{% endblock %}
 
 {% block content %}
-<section class="relative">
-    <div class="absolute inset-0 -z-10">
-        <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-brand-600/15 blur-3xl"></div>
-        <div class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-leaf-600/15 blur-3xl"></div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+<section class="relative min-h-[75vh] flex items-center pt-8 pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
         <!-- Left: value/hero -->
-        <div class="pt-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/5 text-slate-700 text-sm font-semibold">
-                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-soft">
-                    <i class="fas fa-sparkles text-brand-700 text-xs"></i>
+        <div class="lg:col-span-5 xl:col-span-6 relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 shadow-sm backdrop-blur-md text-emerald-400 text-sm font-semibold mb-6 animate-fade-in-down" style="animation-delay: 0.1s;">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
-                Leaf Disease Detector
+                Next-Gen Detection Engine
             </div>
 
-            <h1 class="mt-5 text-4xl md:text-5xl font-extrabold tracking-tight text-ink-900">
-                Upload a leaf photo.
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-leaf-700 to-brand-700">Get an instant diagnosis.</span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.1] animate-fade-in-down" style="animation-delay: 0.2s;">
+                Diagnose plant health in <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">seconds.</span>
             </h1>
 
-            <p class="mt-4 text-slate-600 leading-relaxed max-w-xl">
-                CropCare AI runs a quick image analysis and returns the most likely disease label with confidence.
-                Works great for college demos: simple flow, clean UI, clear output.
+            <p class="mt-6 text-lg text-slate-400 leading-relaxed max-w-xl animate-fade-in-down font-medium" style="animation-delay: 0.3s;">
+                Upload a clear image of a plant leaf and let our advanced machine learning models identify potential diseases instantly with high confidence scoring.
             </p>
 
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl">
-                <div class="rounded-2xl bg-white shadow-soft border border-slate-200/70 p-4">
-                    <div class="flex items-center gap-2 text-sm font-bold text-ink-900">
-                        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-leaf-600/10 text-leaf-700">
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl animate-fade-in-down" style="animation-delay: 0.4s;">
+                <div class="rounded-2xl glass-panel p-5 group hover:-translate-y-1 transition-all duration-300 border-white/10 bg-white/5">
+                    <div class="flex items-center gap-3 text-base font-display font-bold text-white mb-2">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                             <i class="fas fa-bolt"></i>
-                        </span>
-                        Fast results
+                        </div>
+                        Instant Analysis
                     </div>
-                    <p class="mt-2 text-xs text-slate-600">Single upload → prediction page.</p>
+                    <p class="text-sm text-slate-400 font-medium">Real-time processing powered by optimized ML architectures.</p>
                 </div>
-                <div class="rounded-2xl bg-white shadow-soft border border-slate-200/70 p-4">
-                    <div class="flex items-center gap-2 text-sm font-bold text-ink-900">
-                        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600/10 text-brand-700">
-                            <i class="fas fa-brain"></i>
-                        </span>
-                        AI powered
+                <div class="rounded-2xl glass-panel p-5 group hover:-translate-y-1 transition-all duration-300 border-white/10 bg-white/5">
+                    <div class="flex items-center gap-3 text-base font-display font-bold text-white mb-2">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-xl bg-teal-500/20 text-teal-400 border border-teal-500/30 group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        High Accuracy
                     </div>
-                    <p class="mt-2 text-xs text-slate-600">Confidence + all class scores.</p>
-                </div>
-                <div class="rounded-2xl bg-white shadow-soft border border-slate-200/70 p-4">
-                    <div class="flex items-center gap-2 text-sm font-bold text-ink-900">
-                        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900/10 text-slate-800">
-                            <i class="fas fa-shield"></i>
-                        </span>
-                        Safe upload
-                    </div>
-                    <p class="mt-2 text-xs text-slate-600">Type/size checks included.</p>
+                    <p class="text-sm text-slate-400 font-medium">Detailed confidence metrics for reliable decision making.</p>
                 </div>
             </div>
         </div>
 
         <!-- Right: upload panel -->
-        <div class="lg:pl-6">
-            <div class="rounded-3xl bg-white shadow-lift border border-slate-200/70 overflow-hidden">
-                <div class="px-7 py-6 bg-gradient-to-r from-ink-900 to-ink-700 text-white">
-                    <div class="flex items-start justify-between gap-4">
+        <div class="lg:col-span-7 xl:col-span-6 animate-fade-in-down" style="animation-delay: 0.5s;">
+            <div class="relative">
+                <!-- Glowing background behind the card -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-[2.5rem] blur-xl opacity-30 animate-pulse"></div>
+                
+                <div class="relative rounded-[2rem] bg-[#06090F]/80 backdrop-blur-xl shadow-2xl border border-white/10 overflow-hidden">
+                    <div class="px-8 py-6 border-b border-white/10 flex items-center justify-between bg-white/5">
                         <div>
-                            <div class="text-sm text-white/70 font-semibold">Step 1</div>
-                            <div class="text-2xl font-extrabold tracking-tight">Upload leaf image</div>
-                            <div class="text-sm text-white/70 mt-1">JPG / PNG / GIF • max 5MB</div>
+                            <div class="font-display font-bold text-xl text-white">Upload Image</div>
+                            <div class="text-sm font-medium text-slate-400">JPG, PNG or GIF up to 5MB</div>
                         </div>
-                        <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
+                        <div class="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
                             <i class="fas fa-cloud-arrow-up text-xl"></i>
-                        </span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="p-7">
-                    <form id="uploadForm" method="post" enctype="multipart/form-data" class="space-y-5">
-                        {% csrf_token %}
+                    <div class="p-8">
+                        <form id="uploadForm" method="post" enctype="multipart/form-data" class="space-y-6">
+                            {% csrf_token %}
 
-                        <input
-                            type="file"
-                            id="imageInput"
-                            name="image"
-                            accept="image/jpeg,image/png,image/gif"
-                            class="hidden"
-                        />
+                            <input
+                                type="file"
+                                id="imageInput"
+                                name="image"
+                                accept="image/jpeg,image/png,image/gif"
+                                class="hidden"
+                            />
 
-                        <label for="imageInput" id="dropZone" class="block cursor-pointer">
-                            <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 hover:bg-slate-100 transition p-6">
-                                <div class="flex items-center gap-4">
-                                    <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-soft text-brand-700">
-                                        <i class="fas fa-image"></i>
-                                    </span>
-                                    <div class="flex-1">
-                                        <div class="font-bold text-ink-900">Drop your image here</div>
-                                        <div class="text-sm text-slate-600">…or click to choose a file</div>
+                            <label for="imageInput" id="dropZone" class="block cursor-pointer group relative overflow-hidden rounded-[1.5rem] border-2 border-dashed border-white/20 bg-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/50 transition-all duration-300 p-10 text-center">
+                                <!-- Background hover glow -->
+                                <div class="absolute inset-0 bg-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                
+                                <div class="relative z-10 flex flex-col items-center gap-4">
+                                    <div class="h-20 w-20 rounded-full bg-white/10 shadow-lg flex items-center justify-center text-emerald-400 border border-white/20 group-hover:scale-110 transition-transform duration-500">
+                                        <i class="fas fa-image text-3xl"></i>
                                     </div>
-                                    <span class="text-xs font-semibold text-slate-500">224×224 input</span>
+                                    <div>
+                                        <div class="font-display font-bold text-lg text-white">Drag & drop your leaf image here</div>
+                                        <div class="text-sm font-medium text-slate-400 mt-1">or click to browse your files</div>
+                                    </div>
+                                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-xs font-semibold text-slate-300">
+                                        <i class="fas fa-crop-simple"></i> Auto-resized to 224x224
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Selected File Indicator -->
+                            <div id="fileIndicator" class="hidden overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 transition-all duration-300">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3 overflow-hidden">
+                                        <div class="h-10 w-10 flex-shrink-0 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                                            <i class="fas fa-file-image"></i>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <div id="selectedName" class="font-semibold text-white truncate text-sm">filename.jpg</div>
+                                            <div id="selectedSize" class="text-xs font-medium text-slate-400">2.4 MB</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="removeFile" class="h-8 w-8 rounded-full bg-white/10 border border-white/20 text-slate-400 hover:text-red-400 shadow-sm flex items-center justify-center transition-colors">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </label>
 
-                        <div class="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
-                            <div class="text-sm text-slate-600">
-                                <span class="font-semibold text-ink-900">Selected:</span>
-                                <span id="selectedName" class="ml-2">None</span>
-                            </div>
-                            <span id="selectedBadge" class="hidden text-xs font-bold px-2.5 py-1 rounded-full bg-leaf-600/10 text-leaf-700">
-                                Ready
-                            </span>
-                        </div>
+                            {% if form.image.errors %}
+                                <div class="rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-700 animate-fade-in-down">
+                                    <div class="flex items-center gap-2 font-bold mb-2">
+                                        <i class="fas fa-triangle-exclamation"></i> Upload Error
+                                    </div>
+                                    <ul class="list-disc pl-5 space-y-1 font-medium">
+                                        {% for error in form.image.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
 
-                        {% if form.image.errors %}
-                            <div class="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                                <div class="font-bold mb-1">Upload issue</div>
-                                <ul class="list-disc pl-5 space-y-1">
-                                    {% for error in form.image.errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-
-                        <button type="submit" id="submitBtn"
-                                class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold py-3.5 shadow-soft transition active:translate-y-px">
-                            <i class="fas fa-wand-magic-sparkles"></i>
-                            Detect Disease
-                        </button>
-
-                        <p class="text-xs text-slate-500 leading-relaxed">
-                            Tip: use a clear, well-lit photo where the leaf fills most of the frame.
-                        </p>
-                    </form>
+                            <button type="submit" id="submitBtn"
+                                    class="relative w-full group overflow-hidden rounded-2xl bg-ink-900 text-white font-display font-bold py-4 shadow-xl hover:shadow-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="relative z-10 flex items-center justify-center gap-2">
+                                    <i class="fas fa-wand-magic-sparkles"></i>
+                                    <span>Analyze Image</span>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,9 +140,13 @@
 </section>
 
 <style>
-  #dropZone.drag-over > div {
-    border-color: rgba(47, 107, 255, .7) !important;
-    background-color: rgba(47, 107, 255, .08) !important;
+  #dropZone.drag-over {
+    border-color: #10B981 !important;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+  #dropZone.drag-over > div:last-child > div:first-child {
+      transform: scale(1.1);
+      color: #34D399;
   }
 </style>
 
@@ -152,26 +155,41 @@
         const imageInput = document.getElementById('imageInput');
         const dropZone = document.getElementById('dropZone');
         const uploadForm = document.getElementById('uploadForm');
+        const fileIndicator = document.getElementById('fileIndicator');
         const selectedName = document.getElementById('selectedName');
-        const selectedBadge = document.getElementById('selectedBadge');
-        const submitBtn = document.getElementById('submitBtn');
+        const selectedSize = document.getElementById('selectedSize');
+        const removeFileBtn = document.getElementById('removeFile');
 
-        // Click to select file
-        dropZone.addEventListener('click', function(e) {
-            if (e.target !== imageInput) {
-                imageInput.click();
-            }
-        });
+        // Note: dropZone is a <label for="imageInput">, so the browser already opens
+        // the file picker natively on click. No extra JS click() call needed.
 
         // File input change event
         imageInput.addEventListener('change', function(e) {
-            if (this.files && this.files.length > 0) {
-                const fileName = this.files[0].name;
-                const fileSize = (this.files[0].size / 1024 / 1024).toFixed(2);
-                selectedName.textContent = `${fileName} (${fileSize} MB)`;
-                selectedName.className = 'text-ink-900 font-semibold';
-                selectedBadge.classList.remove('hidden');
+            handleFiles(this.files);
+        });
+
+        function handleFiles(files) {
+            if (files && files.length > 0) {
+                const file = files[0];
+                selectedName.textContent = file.name;
+                selectedSize.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+                
+                dropZone.classList.add('hidden');
+                fileIndicator.classList.remove('hidden');
+            } else {
+                resetUpload();
             }
+        }
+
+        function resetUpload() {
+            imageInput.value = '';
+            dropZone.classList.remove('hidden');
+            fileIndicator.classList.add('hidden');
+        }
+
+        removeFileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            resetUpload();
         });
 
         // Drag and drop events
@@ -202,10 +220,7 @@
         dropZone.addEventListener('drop', function(e) {
             const files = e.dataTransfer.files;
             imageInput.files = files;
-            
-            // Trigger change event manually
-            const event = new Event('change', { bubbles: true });
-            imageInput.dispatchEvent(event);
+            handleFiles(files);
         }, false);
 
         // Form submission
@@ -213,6 +228,10 @@
             if (!imageInput.files || imageInput.files.length === 0) {
                 e.preventDefault();
                 alert('Please select an image first');
+            } else {
+                const btn = document.getElementById('submitBtn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+                btn.classList.add('opacity-75', 'cursor-wait');
             }
         });
     });

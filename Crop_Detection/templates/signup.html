@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - CropCare AI{% endblock %}
+
+{% block content %}
+<div class="mx-auto w-full max-w-md rounded-[2rem] bg-white/5 border border-white/10 shadow-glow p-8 backdrop-blur-xl">
+    <div class="mb-8 text-center">
+        <h1 class="text-3xl font-display font-bold text-white">Create your account</h1>
+        <p class="mt-3 text-sm text-slate-400">Sign up to save your scans and get faster access to crop disease insights.</p>
+    </div>
+
+    <form method="post" class="space-y-6" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="rounded-2xl bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-200">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <div>
+            <label for="id_username" class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <p class="mt-2 text-xs text-red-400">{{ form.username.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="id_email" class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <p class="mt-2 text-xs text-red-400">{{ form.email.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="id_password1" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+            <p class="mt-2 text-xs text-red-400">{{ form.password1.errors|join:", " }}</p>
+            {% endif %}
+            <div class="mt-3 rounded-2xl bg-slate-900/70 border border-slate-700 p-4 text-sm text-slate-300">
+                <p class="font-semibold text-slate-100">Password requirements:</p>
+                <ul class="mt-2 list-disc list-inside space-y-1 text-slate-400">
+                    <li>At least 8 characters long</li>
+                    <li>Include both letters and numbers</li>
+                    <li>Cannot be entirely numeric</li>
+                    <li>Should not be a common password</li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <label for="id_password2" class="block text-sm font-medium text-slate-300 mb-2">Confirm password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+            <p class="mt-2 text-xs text-red-400">{{ form.password2.errors|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 hover:opacity-95 transition-all">
+            Sign Up
+        </button>
+    </form>
+
+    <div class="mt-6 text-center text-sm text-slate-400">
+        Already have an account?
+        <a href="{% url 'detection:login' %}" class="font-semibold text-emerald-300 hover:text-white">Login here</a>
+    </div>
+</div>
+{% endblock %}

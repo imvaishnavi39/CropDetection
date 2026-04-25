@@ -1,10 +1,14 @@
 import os
 import json
+import hashlib
 import numpy as np
 from PIL import Image
 from django.conf import settings
 import pickle
 import cv2
+
+# Prediction cache: maps image MD5 hash -> prediction dict
+_prediction_cache = {}
 
 
 # Disease labels
@@ -12,7 +16,56 @@ DISEASE_LABELS = ['Healthy', 'Powdery Mildew', 'Rust', 'Leaf Spot']
 
 # Cache for the model
 _model = None
-_model_type = None  # 'keras' or 'mock'
+_model_type = None  # 'keras' or 'mock' or 'real'
+
+def extract_features(img_array):
+    """
+    Extracts color histograms and basic texture features from a single RGB image.
+    img_array: numpy array of shape (224, 224, 3) with values in [0, 1]
+    """
+    # Convert to uint8 for cv2
+    img_uint8 = (img_array * 255).astype(np.uint8)
+    
+    # Convert to HSV color space which is much better for color segmentation
+    hsv = cv2.cvtColor(img_uint8, cv2.COLOR_RGB2HSV)
+    
+    # Calculate 3D histogram
+    hist = cv2.calcHist([hsv], [0, 1, 2], None, [8, 8, 8], [0, 180, 0, 256, 0, 256])
+    cv2.normalize(hist, hist)
+    hist_features = hist.flatten()
+    
+    # Also calculate basic color means to capture the dominant color quickly
+    mean_color = np.mean(img_uint8, axis=(0, 1)) / 255.0
+    std_color = np.std(img_uint8, axis=(0, 1)) / 255.0
+    
+    # Combine features
+    return np.concatenate([hist_features, mean_color, std_color])
+
+
+class RealDiseaseDetectionModel:
+    """
+    Real ML model using RandomForest on Color Histograms.
+    This class wraps the scikit-learn model so it matches the expected interface.
+    """
+    def __init__(self, rf_model):
+        self.name = "RandomForest Plant Disease Model"
+        self.rf_model = rf_model
+        self.classes = DISEASE_LABELS
+        
+    def predict(self, images, verbose=0):
+        """
+        Make predictions for a batch of images.
+        images: Array of shape (batch_size, 224, 224, 3) normalized to [0, 1]
+        """
+        batch_features = []
+        for img in images:
+            feats = extract_features(img)
+            batch_features.append(feats)
+            
+        X = np.array(batch_features)
+        predictions = self.rf_model.predict_proba(X)
+        return predictions
+
 
 
 def get_model():
@@ -31,7 +84,13 @@ def get_model():
             try:
                 with open(model_path, 'rb') as f:
                     _model = pickle.load(f)
-                _model_type = 'mock'
+                
+                # Check if it's our new real model or the old mock model
+                if hasattr(_model, 'rf_model'):
+                    _model_type = 'real'
+                else:
+                    _model_type = 'mock'
+                    
                 return _model
             except Exception as e:
                 print(f"Failed to load pickle model: {e}")
@@ -163,47 +222,51 @@ def is_leaf(image_path, threshold=0.05):
 def predict_disease(image_path):
     """
     Predict disease from an image.
-    
-    Args:
-        image_path: Path to the image file
-    
-    Returns:
-        Dictionary with:
-            - disease: Predicted disease name
-            - confidence: Confidence percentage (0-100)
-            - label_index: Index of the predicted label
-            - all_predictions: Dict of all disease probabilities
+    Returns a cached result if this exact image file has been seen before,
+    ensuring the same image always produces the same result.
     """
     try:
         # Check if the image is actually a leaf
         if not is_leaf(image_path):
             raise ValueError("The uploaded image does not appear to be a plant leaf. Please upload a clear image of a leaf.")
-            
+
+        # Compute MD5 hash of the image file for stable caching
+        hasher = hashlib.md5()
+        with open(image_path, 'rb') as f:
+            for chunk in iter(lambda: f.read(8192), b''):
+                hasher.update(chunk)
+        image_hash = hasher.hexdigest()
+
+        # Return cached prediction for this exact image
+        if image_hash in _prediction_cache:
+            return _prediction_cache[image_hash]
+
         # Get model
         model = get_model()
-        
+
         # Preprocess image
         img_array = preprocess_image(image_path)
-        
+
         # Make prediction
         predictions = model.predict(img_array, verbose=0)
-        predicted_index = np.argmax(predictions[0])
-        confidence = float(predictions[0][predicted_index]) * 100
-        
-        # Round confidence to 2 decimal places
-        confidence = round(confidence, 2)
-        
-        # Get disease label
+        predicted_index = int(np.argmax(predictions[0]))
+        confidence = round(float(predictions[0][predicted_index]) * 100, 2)
+
         disease = DISEASE_LABELS[predicted_index]
-        
-        return {
+
+        result = {
             'disease': disease,
             'confidence': confidence,
-            'label_index': int(predicted_index),
+            'label_index': predicted_index,
             'all_predictions': {DISEASE_LABELS[i]: round(float(p) * 100, 2) for i, p in enumerate(predictions[0])},
             'model_type': _model_type
         }
-    
+
+        # Cache and return
+        _prediction_cache[image_hash] = result
+        return result
+
     except Exception as e:
         raise Exception(f"Prediction failed: {str(e)}")
+
 

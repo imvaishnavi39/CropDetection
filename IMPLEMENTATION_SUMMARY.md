@@ -2,6 +2,14 @@
 
 ## 📦 What Has Been Created
 
+## 🧠 Clarification: `models.py` vs ML “model” files
+
+- **`Crop_Detection/models.py`**: Django **database models** (tables) for storing app data.
+- **`create_model.py`**: A one-time **utility script** that generates a *placeholder* ML model file at `model/plant_model.pkl` so the app can run without TensorFlow.
+- **`Crop_Detection/model_loader.py`**: The **inference helper** that loads `plant_model.pkl` (or `plant_model.h5` if you provide one) and runs predictions.
+
+These serve different purposes and aren’t duplicates.
+
 ### 1. Django Configuration Files
 - ✅ **Crop/settings.py** - Updated with:
   - INSTALLED_APPS including 'Crop_Detection'
@@ -117,10 +125,10 @@ CropCare AI/
 │   ├── apps.py
 │   ├── models.py
 │   ├── tests.py
-│   ├── forms.py                  ✅ CREATED
-│   ├── views.py                  ✅ CREATED
-│   ├── urls.py                   ✅ CREATED
-│   ├── model_loader.py           ✅ CREATED
+│   ├── forms.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── model_loader.py           (loads ML model files for predictions)
 │   │
 │   ├── migrations/
 │   │   └── __init__.py
@@ -353,4 +361,4 @@ Then visit: **http://127.0.0.1:8000/**
 
 ---
 
-**Your full-stack crop disease detection app is complete! 🌾✨**
+**Your full-stack crop disease detection app is complete!**

@@ -3,229 +3,201 @@
 {% block title %}Contact Us - CropCare AI{% endblock %}
 
 {% block content %}
-<section class="relative">
-    <div class="absolute inset-0 -z-10">
-        <div class="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-brand-600/15 blur-3xl"></div>
-        <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-leaf-600/15 blur-3xl"></div>
+<section class="relative animate-fade-in-down">
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-emerald-500/10 blur-[100px]"></div>
+        <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-teal-500/10 blur-[100px]"></div>
     </div>
 
-    <div class="flex items-start justify-between gap-6 flex-wrap">
-        <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/5 text-slate-700 text-sm font-semibold">
-                <i class="fas fa-message"></i>
-                Contact
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-slate-200 shadow-sm text-emerald-700 text-sm font-bold mb-4">
+                <i class="fas fa-paper-plane"></i>
+                Get in Touch
             </div>
-            <h1 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight text-ink-900">Send a message</h1>
-            <p class="mt-2 text-slate-600 max-w-2xl">
-                For demo projects, a simple form is perfect. Name and email required; message optional.
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white mb-4">Let's connect</h1>
+            <p class="text-lg text-slate-400 font-medium">
+                Have questions about our machine learning pipeline or want to discuss agricultural AI solutions? We'd love to hear from you.
             </p>
         </div>
-
-        <a href="{% url 'detection:index' %}"
-           class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-ink-900 text-white font-extrabold shadow-soft hover:opacity-95 transition">
-            <i class="fas fa-wand-magic-sparkles"></i>
-            Go to Detection
-        </a>
-    </div>
-
-<!-- Contact Section -->
-<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-    <!-- Contact Info Cards -->
-    <div class="rounded-3xl bg-white shadow-soft border border-slate-200/70 p-6">
-        <div class="flex items-center gap-3">
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-leaf-600/10 text-leaf-700">
-                <i class="fas fa-location-dot"></i>
-            </span>
-            <div class="font-extrabold text-ink-900">Address</div>
-        </div>
-        <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            Agricultural Innovation Center<br>Tech Park Road<br>Innovation City
-        </p>
-    </div>
-    
-    <div class="rounded-3xl bg-white shadow-soft border border-slate-200/70 p-6">
-        <div class="flex items-center gap-3">
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
-                <i class="fas fa-phone"></i>
-            </span>
-            <div class="font-extrabold text-ink-900">Phone</div>
-        </div>
-        <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            +1 (555) 123-4567<br>Mon–Fri • 9AM–6PM
-        </p>
-    </div>
-    
-    <div class="rounded-3xl bg-white shadow-soft border border-slate-200/70 p-6">
-        <div class="flex items-center gap-3">
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
-                <i class="fas fa-envelope"></i>
-            </span>
-            <div class="font-extrabold text-ink-900">Email</div>
-        </div>
-        <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-            <a href="mailto:info@cropcare.ai" class="text-brand-700 font-semibold hover:underline">info@cropcare.ai</a><br>
-            <span class="text-slate-500">Response within 24 hours</span>
-        </p>
-    </div>
-</div>
-
-<!-- Contact Form -->
-<div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-    <!-- Form -->
-    <div class="lg:col-span-7 rounded-3xl bg-white shadow-lift border border-slate-200/70 p-7">
-        <div class="flex items-center gap-3">
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-700">
-                <i class="fas fa-paper-plane"></i>
-            </span>
-            <div>
-                <div class="font-extrabold text-ink-900 text-xl">Contact form</div>
-                <div class="text-sm text-slate-600">We’ll show a success message after submit.</div>
-            </div>
-        </div>
         
-        <form method="post" class="space-y-5 mt-6">
-            {% csrf_token %}
-            
-            <!-- Name Field -->
-            <div>
-                <label for="name" class="block text-slate-700 font-bold mb-2">
-                    Full Name
-                </label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    required
-                    placeholder="Your full name"
-                    class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/15 focus:border-brand-600 transition"
-                />
-            </div>
-            
-            <!-- Email Field -->
-            <div>
-                <label for="email" class="block text-slate-700 font-bold mb-2">
-                    Email Address
-                </label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    required
-                    placeholder="your.email@example.com"
-                    class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/15 focus:border-brand-600 transition"
-                />
-            </div>
-            
-            <!-- Subject Field -->
-            <div>
-                <label for="subject" class="block text-slate-700 font-bold mb-2">
-                    Subject
-                </label>
-                <input 
-                    type="text" 
-                    id="subject" 
-                    name="subject" 
-                    required
-                    placeholder="What is this about?"
-                    class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/15 focus:border-brand-600 transition"
-                />
-            </div>
-            
-            <!-- Message Field -->
-            <div>
-                <label for="message" class="block text-slate-700 font-bold mb-2">
-                    Message <span class="text-slate-400 font-semibold">(optional)</span>
-                </label>
-                <textarea 
-                    id="message" 
-                    name="message" 
-                    rows="5"
-                    placeholder="Please type your message here..."
-                    class="w-full px-4 py-3 rounded-2xl border border-slate-200/70 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-600/15 focus:border-brand-600 transition resize-none"
-                ></textarea>
-            </div>
-            
-            <!-- Submit Button -->
-            <button 
-                type="submit"
-                class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold py-3.5 shadow-soft transition active:translate-y-px"
-            >
-                <i class="fas fa-paper-plane"></i>
-                Send Message
-            </button>
-        </form>
-        
-        <!-- Form Help Text -->
-        <p class="text-xs text-slate-500 mt-4">
-            <i class="fas fa-info-circle mr-1"></i>Tip: for college projects, explain this form uses POST + server-side validation.
-        </p>
-    </div>
-    
-    <!-- FAQ / Additional Info -->
-    <div class="lg:col-span-5 rounded-3xl bg-white shadow-lift border border-slate-200/70 p-7">
-        <div class="flex items-center gap-3">
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-800">
-                <i class="fas fa-question"></i>
-            </span>
-            <div>
-                <div class="font-extrabold text-ink-900 text-xl">Quick FAQ</div>
-                <div class="text-sm text-slate-600">Short answers for demo/viva.</div>
+        <div class="flex-shrink-0 hidden md:block">
+            <div class="h-24 w-24 rounded-full bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 flex items-center justify-center">
+                <div class="h-16 w-16 rounded-full bg-white shadow-xl flex items-center justify-center text-emerald-600 text-2xl">
+                    <i class="fas fa-headset"></i>
+                </div>
             </div>
         </div>
-        
-        <div class="space-y-3 mt-6">
-            <!-- FAQ Item 1 -->
-            <details class="border border-slate-200/70 rounded-2xl p-4 hover:border-brand-600 transition cursor-pointer bg-slate-50">
-                <summary class="font-bold text-ink-900 cursor-pointer">
-                    How accurate is CropCare AI?
-                </summary>
-                <p class="text-slate-600 mt-2 text-sm">
-                    For the placeholder model, results are for demonstration. With a trained dataset/model, accuracy improves significantly.
-                </p>
-            </details>
-            
-            <!-- FAQ Item 2 -->
-            <details class="border border-slate-200/70 rounded-2xl p-4 hover:border-brand-600 transition cursor-pointer bg-slate-50">
-                <summary class="font-bold text-ink-900 cursor-pointer">
-                    Is my data safe?
-                </summary>
-                <p class="text-slate-600 mt-2 text-sm">
-                    Uploaded images are stored under the local `media/` folder in development. You can clean them anytime.
-                </p>
-            </details>
-            
-            <!-- FAQ Item 3 -->
-            <details class="border border-slate-200/70 rounded-2xl p-4 hover:border-brand-600 transition cursor-pointer bg-slate-50">
-                <summary class="font-bold text-ink-900 cursor-pointer">
-                    Which crops does CropCare AI support?
-                </summary>
-                <p class="text-slate-600 mt-2 text-sm">
-                    The demo model supports 4 classes (Healthy, Powdery Mildew, Rust, Leaf Spot). You can expand by training a multi-class model.
-                </p>
-            </details>
-            
-            <!-- FAQ Item 4 -->
-            <details class="border border-slate-200/70 rounded-2xl p-4 hover:border-brand-600 transition cursor-pointer bg-slate-50">
-                <summary class="font-bold text-ink-900 cursor-pointer">
-                    Do you offer API access?
-                </summary>
-                <p class="text-slate-600 mt-2 text-sm">
-                    Not in this version. It can be extended with a REST API endpoint for mobile apps.
-                </p>
-            </details>
-            
-            <!-- FAQ Item 5 -->
-            <details class="border border-slate-200/70 rounded-2xl p-4 hover:border-brand-600 transition cursor-pointer bg-slate-50">
-                <summary class="font-bold text-ink-900 cursor-pointer">
-                    Is there a mobile app?
-                </summary>
-                <p class="text-slate-600 mt-2 text-sm">
-                    The UI is responsive, so it works well on phones. A dedicated app can be built later.
-                </p>
-            </details>
-        </div>
     </div>
-</div>
 
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Contact Info & FAQ Sidebar -->
+        <div class="lg:col-span-5 space-y-6">
+            <!-- Info Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                <div class="rounded-[1.5rem] glass-panel p-6 shadow-md border border-white/10 hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="flex items-start gap-4">
+                        <div class="h-12 w-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shadow-sm border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-bold text-lg text-white mb-1">Headquarters</div>
+                            <p class="text-slate-400 text-sm font-medium leading-relaxed">Agricultural Innovation Center<br>Tech Park Road<br>Innovation City</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-[1.5rem] glass-panel p-6 shadow-md border border-white/10 hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="flex items-start gap-4">
+                        <div class="h-12 w-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl shadow-sm border border-teal-500/30 group-hover:bg-teal-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-bold text-lg text-white mb-1">Direct Email</div>
+                            <a href="mailto:info@cropcare.ai" class="text-emerald-400 hover:text-emerald-300 text-sm font-bold transition-colors">info@cropcare.ai</a>
+                            <p class="text-slate-500 text-xs font-medium mt-1">Typical reply within 24h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Panel -->
+            <div class="rounded-[2rem] bg-white/5 border border-white/10 text-white p-8 shadow-xl mt-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-circle-question text-emerald-400 text-xl"></i>
+                    <h3 class="font-display font-bold text-xl">Quick FAQ</h3>
+                </div>
+                
+                <div class="space-y-4">
+                    <details class="group border-b border-white/10 pb-4">
+                        <summary class="flex justify-between items-center font-bold cursor-pointer list-none text-sm hover:text-emerald-400 transition-colors">
+                            <span>How accurate is the current model?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                            </span>
+                        </summary>
+                        <p class="text-slate-400 text-sm mt-3 font-medium leading-relaxed">
+                            The demo utilizes a specialized CNN architecture. While highly accurate on standardized test sets, real-world deployment requires continued fine-tuning on regional data.
+                        </p>
+                    </details>
+                    
+                    <details class="group border-b border-white/10 pb-4">
+                        <summary class="flex justify-between items-center font-bold cursor-pointer list-none text-sm hover:text-emerald-400 transition-colors">
+                            <span>Is my uploaded data stored?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                            </span>
+                        </summary>
+                        <p class="text-slate-400 text-sm mt-3 font-medium leading-relaxed">
+                            For this demonstration, images are processed in local memory or a temporary storage directory and routinely cleared to preserve privacy.
+                        </p>
+                    </details>
+                    
+                    <details class="group border-b border-white/10 pb-4">
+                        <summary class="flex justify-between items-center font-bold cursor-pointer list-none text-sm hover:text-emerald-400 transition-colors">
+                            <span>Are API integrations available?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+                            </span>
+                        </summary>
+                        <p class="text-slate-400 text-sm mt-3 font-medium leading-relaxed">
+                            A RESTful API endpoint returning JSON inferences is in development for seamless mobile and enterprise integrations.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-7">
+            <div class="rounded-[2rem] glass-panel p-8 md:p-10 shadow-2xl border border-white/10 relative overflow-hidden h-full">
+                <!-- Background Decoration -->
+                <div class="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-emerald-500/5 blur-[80px]"></div>
+
+                <div class="mb-8">
+                    <h2 class="font-display font-bold text-2xl text-white mb-2">Send us a Message</h2>
+                    <p class="text-slate-400 text-sm font-medium">Fill out the form below and our team will get back to you shortly.</p>
+                </div>
+
+                <form method="post" class="space-y-6 relative z-10">
+                    {% csrf_token %}
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name Field -->
+                        <div>
+                            <label for="name" class="block text-sm font-bold text-white mb-2 ml-1">
+                                Full Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required
+                                placeholder="John Doe"
+                                class="w-full px-5 py-3.5 rounded-xl border border-white/10 bg-[#06090F]/50 backdrop-blur-sm focus:bg-[#0A0E17] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-medium text-white shadow-inner placeholder-slate-500"
+                            />
+                        </div>
+                        
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email" class="block text-sm font-bold text-white mb-2 ml-1">
+                                Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                placeholder="john@example.com"
+                                class="w-full px-5 py-3.5 rounded-xl border border-white/10 bg-[#06090F]/50 backdrop-blur-sm focus:bg-[#0A0E17] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-medium text-white shadow-inner placeholder-slate-500"
+                            />
+                        </div>
+                    </div>
+                    
+                    <!-- Subject Field -->
+                    <div>
+                        <label for="subject" class="block text-sm font-bold text-white mb-2 ml-1">
+                            Subject
+                        </label>
+                        <input 
+                            type="text" 
+                            id="subject" 
+                            name="subject" 
+                            required
+                            placeholder="How can we help you?"
+                            class="w-full px-5 py-3.5 rounded-xl border border-white/10 bg-[#06090F]/50 backdrop-blur-sm focus:bg-[#0A0E17] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-medium text-white shadow-inner placeholder-slate-500"
+                        />
+                    </div>
+                    
+                    <!-- Message Field -->
+                    <div>
+                        <label for="message" class="block text-sm font-bold text-white mb-2 ml-1">
+                            Message <span class="text-slate-400 font-medium">(Optional)</span>
+                        </label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="5"
+                            placeholder="Tell us more about your inquiry..."
+                            class="w-full px-5 py-3.5 rounded-xl border border-white/10 bg-[#06090F]/50 backdrop-blur-sm focus:bg-[#0A0E17] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all font-medium text-white shadow-inner placeholder-slate-500 resize-none"
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        class="w-full group overflow-hidden relative rounded-xl bg-ink-900 text-white font-display font-bold py-4 shadow-xl hover:shadow-2xl transition-all duration-300 mt-2"
+                    >
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative z-10 flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
