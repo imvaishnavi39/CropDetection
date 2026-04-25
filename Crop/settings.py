@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+from urllib.parse import urlparse, parse_qsl
+
+# Load variables from .env file (only relevant in local development;
+# on production servers the env vars are set directly in the environment)
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -70,15 +77,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Crop.wsgi.application'
 
 
-# Database
+# ── Database ──────────────────────────────────────────────────────────────────
+# Uses the DATABASE_URL environment variable (set in .env for local dev,
+# or via the hosting platform's environment settings for production).
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+_db_url = os.getenv("DATABASE_URL", "")
+
+if _db_url:
+    _parsed = urlparse(_db_url)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': _parsed.path.lstrip('/'),
+            'USER': _parsed.username,
+            'PASSWORD': _parsed.password,
+            'HOST': _parsed.hostname,
+            'PORT': _parsed.port or 5432,
+            'OPTIONS': dict(parse_qsl(_parsed.query)),
+        }
     }
-}
+else:
+    # Fallback to SQLite if DATABASE_URL is not configured
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 # Password validation
